@@ -1,0 +1,35 @@
+\section{Summary}
+Target Paper: \textbf{Scaling Synthetic Data Creation with 1,000,000,000 Persona} \cite{Chan2024ScalingSD}
+
+\subsection{Abstract}
+This paper introduces a novel approach to data synthesis through the integration of multiple perspectives based on diverse persona, presenting the \textbf{Persona Hub} as a collective encompassing one billion varied personas. By leveraging these numerous viewpoints, it facilitates the large-scale synthesis of knowledge-rich data across various scenarios.
+
+\subsection{Previous Data Creation}
+\begin{itemize}
+    \item \textbf{Instance-driven}: Utilizing a seed corpus as a prompt for data synthesis, however, scaling up may be constrained by the limitations inherent in the size of the seed corpus.
+    \item \textbf{Key-point-driven}: Utilizing a manually crafted, detailed, and specialized list as the key point for prompts; however, it similarly encounters challenges in scalability and presents difficulties in defining granularity.
+\end{itemize}
+
+\subsection{Persona-Hub}
+\begin{itemize}
+    \item \textbf{Text to Persona}: Inferring a specific persona who is likely to [read|write|like|dislike|...] the text. From a vast reservoir of text, one can extract boundless information, enabling the extensive creation of character compilations.
+    \item \textbf{Persona to Persona}: Certain persona, such as children and beggars, are less represented online; thus, it becomes essential to infer connections from known figures, prompting like "Who is in close relationship with the given persona". By employing the theory of six degrees of separation for further exploration, a broader spectrum of persona can be encompassed.
+\end{itemize}
+
+\subsection{Experiments}
+\begin{itemize}
+    \item \textbf{Persona Generation}: Using the RedPajama v2 dataset to run the Text-to-Persona, and then performing the Persona-to-Persona to generate 1 billion persona.
+    \item \textbf{Deduplication}: Useing MinHash-based Deduplication(used 1-gram and a singnature size of 128) to depulicate at the similarly threshold of 0.9. After that, adopting the text embedding model to compute the embedding of each persona, then filter out the duplicates with a threshold of 0.9.
+    \item \textbf{Persona-driven Data Creation}: Superior to zero-shot and few-shot prompting is the utilization of persona-enhanced few-shot prompting, which significantly enhances the model's persona-driven ability.
+\end{itemize}
+
+
+
+\subsection{Use Caes}
+\begin{itemize}
+    \item \textbf{Math Problems}: By employing diverse personas to craft mathematical problems from various perspectives and scenarios, we can generate a rich array of mathematical inquiries. Utilizing GPT-4o for solution generation will aid in constructing a synthesized test set. Furthermore, fine-tuning Qwen2-7B will demonstrate the enhancement of the model's mathematical capabilities, subsequently testing its performance on MATH to surpass numerous foundational models.
+    \item \textbf{Logical Reasoning Problem}: Diverse personalities bring distinct styles and backgrounds, which in turn foster varied approaches and ideas in logical reasoning; such diversity is immensely beneficial for data generation.
+    \item \textbf{Knowledge-rich Texts}: Complex personalities can facilitate the generation of intricate knowledge and content; leveraging diverse personas and perspectives to compose Quora articles enables the acquisition of a broad spectrum of insights.
+    \item \textbf{Game NPCs}: Integrating diverse personas into distinct gaming contexts allows for the creation of suitable in-game personas and narratives that align with both the established lore and contemporary character backgrounds.
+    \item \textbf{Tool (Function) Development}: By harnessing the varied interpretations and perspectives of different roles, it can create a multitude of distinct usage scenarios to aid in tool development.
+\end{itemize}
